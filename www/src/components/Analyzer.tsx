@@ -637,6 +637,8 @@ export class AnalyzerView extends React.Component<AnalyzerViewProps, {
     ctx.clearRect(0, 0, this.frameSize.w * scale * ratio, this.frameSize.h * scale * ratio);
 
     let src = Rectangle.createRectangleFromSize(this.frameSize);
+    src.x -= 16;
+    src.y -= 48;
     let dst = src.clone().multiplyScalar(scale * this.ratio);
 
     this.drawLayers(frame, ctx, src, dst);

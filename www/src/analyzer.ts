@@ -148,6 +148,8 @@ interface Internal {
   _get_plane_width(pli: number): number;
   _get_plane_height(pli: number): number;
   _get_mi_cols_and_rows(): number;
+  _get_mi_cols(): number;
+  _get_mi_rows(): number;
   _get_tile_cols_and_rows_log2(): number;
   _get_frame_count(): number;
   _get_frame_width(): number;
@@ -456,6 +458,9 @@ export class Decoder {
     if (this.frameSize) {
       return;
     }
+    console.log(this.native._get_mi_cols_and_rows());
+    console.log(this.native._get_mi_cols());
+    console.log(this.native._get_mi_rows());
     this.frameSize = new Size(this.native._get_frame_width(), this.native._get_frame_height());
     this.frameCanvas = document.createElement("canvas");
     this.frameContext = this.frameCanvas.getContext("2d");
@@ -555,9 +560,9 @@ export class Decoder {
         let yUs = (y >> 1) * Us;
         let yVs = (y >> 1) * Vs;
         for (let x = 0; x < w; x++) {
-          let Y = H[Yp + yYs + x];
-          let U = H[Up + yUs + (x >> 1)];
-          let V = H[Vp + yVs + (x >> 1)];
+          let Y = H[Yp + yYs + x - 16];
+          let U = H[Up + yUs + (x >> 1) - 8];
+          let V = H[Vp + yVs + (x >> 1) - 8];
           bgr = YUV2RGB(Y, U, V);
           let r = (bgr >> 0) & 0xFF;
           let g = (bgr >> 8) & 0xFF;

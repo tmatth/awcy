@@ -24,7 +24,7 @@ import { Promise } from "es6-promise";
 import { AsyncEvent } from 'ts-events';
 declare var tinycolor: any;
 
-export let baseUrl = window.location.origin + '/';
+export let baseUrl = "https://arewecompressedyet.com" + '/';  /* window.location.origin + '/'; */
 export let analyzerReportBaseUrl = baseUrl + "/analyzer.html";
 export let analyzerBaseUrl = "/analyzer.html";
 var inMockMode = false;
